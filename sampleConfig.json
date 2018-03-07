@@ -3,6 +3,16 @@
     "ServerAPIUser": "admin",
     "ServerAPIPass": "Password123",
     "ServerAPIPayloadDefault": "{\"ResetType\":\"GracefulShutdown\"}",
+    "CalendarValue001": "ON",
+    "ServerAPIPayload001": "{\"ResetType\":\"On\"}",
+    "CalendarValue002": "",
+    "ServerAPIPayload002": "",
+    "CalendarValue003": "",
+    "ServerAPIPayload003": "",
+    "CalendarValue004": "",
+    "ServerAPIPayload004": "",
+    "CalendarValue005": "",
+    "ServerAPIPayload005": "",
     "ServerAPIIgnoreCertError": true,
     "ICALPath": "https://calendar.google.com/calendar/ical/xyzxyzxyz/basic.ics"
 }

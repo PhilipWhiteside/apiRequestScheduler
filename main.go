@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
+	"time"
 
 	"github.com/PuloV/ics-golang"
 )
@@ -14,6 +16,16 @@ type Config struct {
 	ServerAPIUser            string
 	ServerAPIPass            string
 	ServerAPIPayloadDefault  string
+	CalendarValue001         string
+	ServerAPIPayload001      string
+	CalendarValue002         string
+	ServerAPIPayload002      string
+	CalendarValue003         string
+	ServerAPIPayload003      string
+	CalendarValue004         string
+	ServerAPIPayload004      string
+	CalendarValue005         string
+	ServerAPIPayload005      string
 	ServerAPIIgnoreCertError bool
 	ICALPath                 string
 }
@@ -80,6 +92,27 @@ func LoadICAL(config Config) int {
 		fmt.Println("LoadICAL() - Please check the URL of the calendar ICS")
 	}
 	// Check ICAL current event payload
+	for _, e := range cal[0].GetEvents() {
+		now := time.Now()
+		if now.After(e.GetStart()) && now.Before(e.GetEnd()) {
+			if strings.EqualFold(config.CalendarValue001, e.GetSummary()) {
+				fmt.Println("LoadICAL() - Current even is", e.GetSummary(), "-", &e)
+				return 1
+			} else if strings.EqualFold(config.CalendarValue002, e.GetSummary()) {
+				fmt.Println("LoadICAL() - Current even is", e.GetSummary(), "-", &e)
+				return 2
+			} else if strings.EqualFold(config.CalendarValue003, e.GetSummary()) {
+				fmt.Println("LoadICAL() - Current even is", e.GetSummary(), "-", &e)
+				return 3
+			} else if strings.EqualFold(config.CalendarValue004, e.GetSummary()) {
+				fmt.Println("LoadICAL() - Current even is", e.GetSummary(), "-", &e)
+				return 4
+			} else if strings.EqualFold(config.CalendarValue005, e.GetSummary()) {
+				fmt.Println("LoadICAL() - Current even is", e.GetSummary(), "-", &e)
+				return 5
+			}
+		}
+	}
 
 	fmt.Println("LoadICAL() - Loaded")
 	return 0
