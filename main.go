@@ -8,8 +8,6 @@ import (
 
 // Config for user configuraiton used throughout
 type Config struct {
-	ConfigVersion            int
-	AppDebug                 bool
 	ServerAPIPath            string
 	ServerAPIUser            string
 	ServerAPIPass            string

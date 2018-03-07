@@ -1,6 +1,4 @@
 {
-    "ConfigVersion": 1,
-    "AppDebug": true,
     "ServerAPIPath": "https://serverAPI/redfish/v1/Systems/SNabcabcabc/Actions/System.Reset",
     "ServerAPIUser": "admin",
     "ServerAPIPass": "Password123",
