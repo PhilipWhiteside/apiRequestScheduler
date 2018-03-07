@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+
+	"github.com/PuloV/ics-golang"
 )
 
 // Config for user configuraiton used throughout
@@ -23,8 +25,10 @@ func main() {
 	fmt.Println("Main() - CLI arguments loaded -", CliArguments)
 	// Pass first CLI arugment as config file location
 	config := LoadConfiguration(CliArguments[0])
-	// Print config to stop "declared and not used error"
-	fmt.Println(config)
+	// LoadICAL and return current event summary ON/OFF
+	desiredStatus := LoadICAL(config)
+	// Print desiredStatus to stop "declared and not used error"
+	fmt.Println(desiredStatus)
 	fmt.Println("Main() - Ending application")
 }
 
@@ -48,6 +52,38 @@ func LoadConfiguration(filename string) Config {
 }
 
 // LoadICAL and return current event summary ON/OFF
-// Check ICAL current event payload
+func LoadICAL(config Config) int {
+	fmt.Println("\nLoadICAL() - Loading ICAL")
+	//  create new parser
+	parser := ics.New()
+	// set the filepath for the ics files
+	ics.FilePath = "tmp/new/"
+	// we dont want to delete the temp files
+	ics.DeleteTempFiles = false
+	ics.RepeatRuleApply = true
+	// get the input chan
+	inputChan := parser.GetInputChan()
+	// send the calendar urls to be parsed
+	inputChan <- config.ICALPath
+	fmt.Println("LoadICAL() - Created ICS filesystem settings & load ICAL")
+	//  wait for the calendar to be parsed
+	parser.Wait()
+	// get all calendars in this parser
+	cal, _ := parser.GetCalendars()
+	// Check ICAL payload for errors
+	fmt.Println("LoadICAL() - Events loaded -", cal)
+	if len(cal) > 0 {
+		fmt.Println("LoadICAL() - Calender entries have been pulled. Slice is populated")
+	} else {
+		fmt.Println("LoadICAL() - Calender entries have not been pulled. Slice is empty")
+		fmt.Println("LoadICAL() - App will panic")
+		fmt.Println("LoadICAL() - Please check the URL of the calendar ICS")
+	}
+	// Check ICAL current event payload
+
+	fmt.Println("LoadICAL() - Loaded")
+	return 0
+}
+
 // SetServerState power state from desired state
 // Set payload to match desired state
