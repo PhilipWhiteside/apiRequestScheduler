@@ -21,6 +21,7 @@ I personally run this on a RaspberryPi that is on the same LAN as the server, so
 4. Pass the config file name as an CLI argument
 
 `$ ./apiRequestScheduler config.json`
+
 `$ ./apiRequestScheduler /home/pi/apiRequestScheduler/config.json`
 
 If you want to use this in cron, this is what I'm using on Raspbian on the RaspberryPi
