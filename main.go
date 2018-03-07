@@ -1,8 +1,11 @@
 package main
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"net/http"
 	"os"
 	"strings"
 	"time"
@@ -119,4 +122,51 @@ func LoadICAL(config Config) int {
 }
 
 // SetServerState power state from desired state
-// Set payload to match desired state
+func SetServerState(config Config, state int) {
+	fmt.Println("\nSetServerState() - Setting state")
+
+	if config.ServerAPIIgnoreCertError == true {
+		fmt.Println("SetServerState() - Ignoring self signed certificate errors")
+		// CHANGE SECURITY TO IGNORE SELF SIGNED CERTIFICATE WARNINGS
+		http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+		_, err := http.Get("https://golang.org/")
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+
+	// PERFORM REQUEST ON API
+	// Set payload to match desired state
+	var payload = strings.NewReader("")
+	if state == 0 {
+		fmt.Println("SetServerState() - Setting state to DEFAULT")
+		payload = strings.NewReader(config.ServerAPIPayloadDefault)
+	} else if state == 1 {
+		fmt.Println("SetServerState() - Setting state to", config.CalendarValue001)
+		payload = strings.NewReader(config.ServerAPIPayload001)
+	} else if state == 2 {
+		fmt.Println("SetServerState() - Setting state to", config.CalendarValue002)
+		payload = strings.NewReader(config.ServerAPIPayload002)
+	} else if state == 3 {
+		fmt.Println("SetServerState() - Setting state to", config.CalendarValue003)
+		payload = strings.NewReader(config.ServerAPIPayload003)
+	} else if state == 4 {
+		fmt.Println("SetServerState() - Setting state to", config.CalendarValue004)
+		payload = strings.NewReader(config.ServerAPIPayload004)
+	} else if state == 5 {
+		fmt.Println("SetServerState() - Setting state to", config.CalendarValue005)
+		payload = strings.NewReader(config.ServerAPIPayload005)
+	}
+	fmt.Println("SetServerState() - Sending request payload - ", payload)
+	// Build & trigger the request
+	req, _ := http.NewRequest("POST", config.ServerAPIPath, payload)
+	req.SetBasicAuth(config.ServerAPIUser, config.ServerAPIPass)
+	req.Header.Add("Cache-Control", "no-cache")
+	res, _ := http.DefaultClient.Do(req)
+	fmt.Println("SetServerState() - Request made")
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+	// Print the result of request
+	fmt.Println(res)
+	fmt.Println(string(body))
+}
