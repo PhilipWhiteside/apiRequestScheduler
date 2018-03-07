@@ -13,6 +13,6 @@
     "ServerAPIPayload004": "",
     "CalendarValue005": "",
     "ServerAPIPayload005": "",
-    "ServerAPIIgnoreCertError": true,
+    "ServerAPIIgnoreCertError": false,
     "ICALPath": "https://calendar.google.com/calendar/ical/xyzxyzxyz/basic.ics"
 }
