@@ -42,8 +42,8 @@ func main() {
 	config := LoadConfiguration(CliArguments[0])
 	// LoadICAL and return current event summary ON/OFF
 	desiredStatus := LoadICAL(config)
-	// Print desiredStatus to stop "declared and not used error"
-	fmt.Println(desiredStatus)
+	// Send request to API with desiredStatus
+	SetServerState(config, desiredStatus)
 	fmt.Println("Main() - Ending application")
 }
 
