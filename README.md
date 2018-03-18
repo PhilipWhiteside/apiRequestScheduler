@@ -1,6 +1,10 @@
 # apiRequestScheduler
 Trigger API requests based on scheduling with ICS (Google Calendar, etc)
 
+**OS Release Binaries availble**
+
+https://github.com/Philiphlop/apiRequestScheduler/releases/
+
 # What does it do?
 1. Pulls a calendar ICS (Google Calender etc)
 2. Check the current event summary (Subject of the event)
@@ -20,9 +24,9 @@ I personally run this on a RaspberryPi that is on the same LAN as the server, so
 3. Update the config.json with your API detail (URL, user, pass, payload, etc)
 4. Pass the config file name as an CLI argument
 
-`$ ./apiRequestScheduler config.json`
+`$ ./apiRequestScheduler.bin config.json`
 
-`$ ./apiRequestScheduler /home/pi/apiRequestScheduler/config.json`
+`$ ./apiRequestScheduler.bin /home/pi/apiRequestScheduler/config.json`
 
 If you want to use this in cron, this is what I'm using on Raspbian on the RaspberryPi
 
@@ -39,3 +43,6 @@ Run every 1 minute and save StdOut to a logfile
 # m h  dom mon dow   command
 */1 * * * * /home/pi/apiRequestScheduler/apiRequestScheduler.arm.bin /home/pi/apiRequestScheduler/config.json 1>> /home/pi/apiRequestScheduler/apiRequestScheduler.log
 ```
+
+# Disclaimer
+Use at your own risk, try and test for yourself before using it with anything critical. 
