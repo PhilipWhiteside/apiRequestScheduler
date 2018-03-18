@@ -13,7 +13,7 @@ import (
 	"github.com/PuloV/ics-golang"
 )
 
-// Config for user configuraiton used throughout
+// Config for user configuration used throughout
 type Config struct {
 	ServerAPIPath            string
 	ServerAPIUser            string
@@ -38,7 +38,7 @@ func main() {
 	// READ command-line arguments to get config file path
 	CliArguments := os.Args[1:]
 	fmt.Println("Main() - CLI arguments loaded -", CliArguments)
-	// Pass first CLI arugment as config file location
+	// Pass first CLI argument as config file location
 	config := LoadConfiguration(CliArguments[0])
 	// LoadICAL and return current event summary ON/OFF
 	desiredStatus := LoadICAL(config)
