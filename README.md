@@ -5,6 +5,10 @@ Trigger API requests based on scheduling with ICS (Google Calendar, etc)
 
 https://github.com/Philiphlop/apiRequestScheduler/releases/
 
+**In depth post covering usecase, code, setup, etc**
+
+http://philip.whiteside.xyz/articles/2018/api-request-scheduler/
+
 # What does it do?
 1. Pulls a calendar ICS (Google Calender etc)
 2. Check the current event summary (Subject of the event)
