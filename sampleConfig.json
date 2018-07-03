@@ -1,5 +1,5 @@
 {
-    "ServerAPIPath": "https://serverAPI/redfish/v1/Systems/SNabcabcabc/Actions/System.Reset",
+    "ServerAPIPath": "https://serverAPI/redfish/v1/Systems/SNabcabcabc/Actions/ComputerSystem.Reset",
     "ServerAPIUser": "admin",
     "ServerAPIPass": "Password123",
     "ServerAPIPayloadDefault": "{\"ResetType\":\"GracefulShutdown\"}",
